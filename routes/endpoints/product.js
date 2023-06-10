@@ -2,6 +2,7 @@ const Product = require('../../models/product');
 const multer = require('multer');
 const path = require('path');
 const PORT = 5000;
+const axios = require('axios');
 const FILE_PATH = `http://localhost:${PORT}/avatar/`;
 
 
@@ -23,8 +24,8 @@ const avatar = multer(( storage ));
 const routes = function(app) {
   app.get('/products', async(req, res) => {
     try {
-      let product = await Product.find();
-      res.json(product)
+      const products = await axios.get('https://e-commerce-0r6p.onrender.com/');
+      res.json(product.data)
     }catch(err) {
       console.log(err)
       res.send('Error fetching URL')
@@ -35,7 +36,7 @@ const routes = function(app) {
 
   app.post('/products', avatar.any(), async(req, res) => {
     try {
-      let product = new Product(req.body);
+      const products = await axios.post('https://e-commerce-0r6p.onrender.com/');
 
       req.files.forEach((e) => {
         if(e.fieldname == 'avatar') {
@@ -43,7 +44,7 @@ const routes = function(app) {
         }
       });
 
-      await product.save();
+      await products.save();
       res.json({msg: 'data saved', code: 200})
     }catch(err) {
       console.log(err)
