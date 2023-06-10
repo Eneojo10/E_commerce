@@ -40,7 +40,7 @@ const routes = function(app) {
 
       req.files.forEach((e) => {
         if(e.fieldname == 'avatar') {
-          product.avatar = FILE_PATH + e.filename;
+          products.avatar = FILE_PATH + e.filename;
         }
       });
 
@@ -52,7 +52,7 @@ const routes = function(app) {
     }
   });
 
-  app.delete('/product/:id',(req, res) => {
+  app.delete('/products/:id',(req, res) => {
     const productId = req.params.id;
 
     Product.findByIdAndDelete(productId)
@@ -64,7 +64,7 @@ const routes = function(app) {
     });
   });
 
-  app.put('/product/:id', (req, res) => {
+  app.put('/products/:id', (req, res) => {
     const productId = req.params.id;
     const updatedData =req.body;
 
