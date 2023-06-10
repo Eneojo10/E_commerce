@@ -25,7 +25,7 @@ const routes = function(app) {
   app.get('/products', async(req, res) => {
     try {
       const products = await axios.get('https://e-commerce-0r6p.onrender.com/');
-      res.json(product.data)
+      res.json(products.data)
     }catch(err) {
       console.log(err)
       res.send('Error fetching URL')
