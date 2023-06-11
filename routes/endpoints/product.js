@@ -36,7 +36,9 @@ const routes = function(app) {
 
   app.post('/products', avatar.any(), async(req, res) => {
     try {
-      const products = await axios.post('https://e-commerce-0r6p.onrender.com/');
+      const products = await axios.post(
+        'https://e-commerce-0r6p.onrender.com/'
+      );
 
       req.files.forEach((e) => {
         if(e.fieldname == 'avatar') {
