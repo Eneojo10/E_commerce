@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema(
     categories: { type: String },
     color: { type: String },
     old_price:{type: Number, required:true},
-    productId:{type: Number}
+    productId:{type: String, unique:true}
   },
   { timestamps: true }
 );
