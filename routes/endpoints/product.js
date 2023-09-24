@@ -35,6 +35,23 @@ const routes = function (app) {
     }
   });
 
+  app.get('/products/:id', async (req, res) => {
+    const productId = req.params.id;
+
+    try {
+      const product = await Product.findById(productId);
+
+      if(!product) {
+        return res.status(404).json({ error: 'Product not found'});
+      }
+
+      res.json(product);
+    }catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error'});
+    }
+  });
+
   app.post('/products', avatar, async (req, res) => {
     try {
       const product = new Product(req.body);
